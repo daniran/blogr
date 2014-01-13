@@ -19,7 +19,7 @@ public class PostService {
     private static Logger LOG = LoggerFactory.getLogger(PostService.class);
 
     public List<Post> getPosts(int limit) {
-        LOG.debug("Fetching posts with limit: %s", limit);
+        LOG.debug("Fetching posts with limit: {}", limit);
         List<Post> reply = new ArrayList<>();
         List<com.outbrain.test.dal.Post> posts = repo.getPosts(limit);
         for (com.outbrain.test.dal.Post post : posts) {
@@ -29,13 +29,13 @@ public class PostService {
     }
 
     public Post getPost(int id) {
-        LOG.debug("Fetching post with id: %s", id);
+        LOG.debug("Fetching post with id: {}", id);
         com.outbrain.test.dal.Post post = repo.getPost(id);
         return new Post(post);
     }
 
     public Post deletePost(int id) {
-        LOG.debug("Deleting post with id: %s", id);
+        LOG.debug("Deleting post with id: {}", id);
         com.outbrain.test.dal.Post post = repo.deletePost(id);
         if (post == null) {
             return null;
@@ -44,7 +44,7 @@ public class PostService {
     }
 
     public Post savePost(Post post) {
-        LOG.debug("Saving post: %s", post);
+        LOG.debug("Saving post: {}", post);
         if (post.id == null) {
             com.outbrain.test.dal.Post newPost = repo.addPost(post.title, post.content, post.author);
             return new Post(newPost);

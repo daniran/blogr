@@ -19,7 +19,7 @@ public class PostRepository {
     private static Logger LOG = LoggerFactory.getLogger(PostRepository.class);
 
     public List<Post> getPosts(int limit) {
-        LOG.debug("Fetching posts with limit: %s", limit);
+        LOG.debug("Fetching posts with limit: {}", limit);
         try {
             Query query = em.createQuery("select p from Post p order by p.creationTime desc");
             if (limit > 0) {
@@ -34,7 +34,7 @@ public class PostRepository {
     }
 
     public Post addPost(String title, String content, String author) {
-        LOG.debug("Adding post: title: %s content %s author %s", title, content, author);
+        LOG.debug("Adding post: title: {} content {} author {}", title, content, author);
         try {
             Post post = new Post(title, content, author);
             em.persist(post);
@@ -46,7 +46,7 @@ public class PostRepository {
     }
 
     public Post modifyPost(int id, String title, String content, String author) {
-        LOG.debug("Modifying post: id %s title: %s content %s author %s", id, title, content, author);
+        LOG.debug("Modifying post: id {} title: {} content {} author {}", id, title, content, author);
         try {
             Post existing = getPost(id);
             existing.setTitle(title);
@@ -61,13 +61,13 @@ public class PostRepository {
     }
 
     public Post getPost(int id) {
-        LOG.debug("Fetching post with id: %s", id);
+        LOG.debug("Fetching post with id: {}", id);
         Post post = em.find(Post.class, id);
         return post;
     }
 
     public Post deletePost(int id) {
-        LOG.debug("Deleting post with id %s", id);
+        LOG.debug("Deleting post with id {}", id);
         Post post = getPost(id);
         if (post != null) {
             em.remove(post);

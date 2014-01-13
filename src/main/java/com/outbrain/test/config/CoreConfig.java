@@ -9,7 +9,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- * Created by daniran on 1/13/14.
+ * General Config
  */
 @Configuration
 public class CoreConfig {

@@ -4,7 +4,6 @@ import com.outbrain.test.api.PostService;
 import com.outbrain.test.dal.PostRepository;
 import org.springframework.context.annotation.Bean;
 
-import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -23,9 +22,8 @@ public class CoreConfig {
     }
 
     @Bean
-    public EntityManager createEntityManager() {
+    public EntityManagerFactory createEntityManagerFactory() {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.outbrain.jpa.posts");
-        EntityManager em = factory.createEntityManager();
-        return em;
+        return factory;
     }
 }

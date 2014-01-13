@@ -34,7 +34,7 @@ public class PostsQueriesController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{id}")
     public ResponseEntity<Post> viewPost(@PathVariable String id) {
-        Post post = postService.getPost(Integer.parseInt(id));
+        Post post = postService.getPost(Long.parseLong(id));
         if (post == null) {
             return new ResponseEntity<Post>(HttpStatus.NOT_FOUND);
         }

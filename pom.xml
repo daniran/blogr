@@ -176,11 +176,12 @@
                         <id>start-tomcat</id>
                         <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>run-war</goal>
+                            <goal>run</goal>
                         </goals>
                         <configuration>
                             <fork>true</fork>
                             <port>8888</port>
+                            <useTestClasspath>true</useTestClasspath>
                         </configuration>
                     </execution>
                     <execution>

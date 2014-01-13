@@ -29,7 +29,7 @@ public class PostsCommandsController {
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
     public ResponseEntity<Post> deletePost(@PathVariable String id) {
-        Post post = postService.deletePost(Integer.parseInt(id));
+        Post post = postService.deletePost(Long.parseLong(id));
         if (post == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

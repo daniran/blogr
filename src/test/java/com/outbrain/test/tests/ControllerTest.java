@@ -1,7 +1,9 @@
 package com.outbrain.test.tests;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.outbrain.test.api.Post;
 import com.outbrain.test.api.PostService;
+import com.outbrain.test.web.PostsCommandsController;
 import com.outbrain.test.web.PostsQueriesController;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,21 +18,31 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Created by daniran on 1/13/14.
+ * Controller tests:
+ * <p/>
+ * these tests operate a mock controller
+ * there main purpose is to verify the URL mappings to the correct Controller methods
  */
 public class ControllerTest {
 
-    MockMvc mockMvc;
+    MockMvc mockQueriesMvc;
+
+    MockMvc mockCommandsMvc;
 
     @InjectMocks
-    PostsQueriesController controller;
+    PostsQueriesController queriesController;
+
+    @InjectMocks
+    PostsCommandsController commandsController;
 
     @Mock
     PostService postService;
@@ -40,7 +52,11 @@ public class ControllerTest {
 
         MockitoAnnotations.initMocks(this);
 
-        this.mockMvc = MockMvcBuilders.standaloneSetup(controller)
+        this.mockQueriesMvc = MockMvcBuilders.standaloneSetup(queriesController)
+                .setMessageConverters(new MappingJackson2HttpMessageConverter()).build();
+
+
+        this.mockCommandsMvc = MockMvcBuilders.standaloneSetup(commandsController)
                 .setMessageConverters(new MappingJackson2HttpMessageConverter()).build();
     }
 
@@ -53,7 +69,7 @@ public class ControllerTest {
 
         when(postService.getPost(5)).thenReturn(value);
 
-        this.mockMvc.perform(
+        this.mockQueriesMvc.perform(
                 get("/posts/{id}", 5)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
@@ -63,13 +79,33 @@ public class ControllerTest {
 
 
     @Test
-    public void testGetBadPost() throws Exception {
+    public void testBadGetPost() throws Exception {
 
-        this.mockMvc.perform(
+        this.mockQueriesMvc.perform(
                 get("/posts/{id}", 4)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void testModifyPost() throws Exception {
+
+        Post value = new Post();
+        value.id = "5";
+        value.title = "mock post modified";
+
+        when(postService.savePost(any(Post.class))).thenReturn(value);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String postJson = mapper.writer().writeValueAsString(value);
+        this.mockCommandsMvc.perform(
+                post("/posts")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON)
+                        .content(postJson))
+                .andDo(print())
+                .andExpect(jsonPath("$.title").value("mock post modified"));
     }
 
     @Test
@@ -84,7 +120,7 @@ public class ControllerTest {
 
         when(postService.getPosts(10)).thenReturn(posts);
 
-        this.mockMvc.perform(
+        this.mockQueriesMvc.perform(
                 get("/posts")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())

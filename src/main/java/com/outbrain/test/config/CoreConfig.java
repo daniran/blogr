@@ -3,6 +3,7 @@ package com.outbrain.test.config;
 import com.outbrain.test.api.PostService;
 import com.outbrain.test.dal.PostRepository;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -10,6 +11,7 @@ import javax.persistence.Persistence;
 /**
  * Created by daniran on 1/13/14.
  */
+@Configuration
 public class CoreConfig {
     @Bean
     public PostService createService() {

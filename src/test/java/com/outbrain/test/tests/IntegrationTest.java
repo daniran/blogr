@@ -47,7 +47,7 @@ public class IntegrationTest {
         RestTemplate template = new RestTemplate();
         Post newPost = new Post();
         newPost.title = "test post 1";
-        ResponseEntity<Post> entity = template.postForEntity("http://localhost:8888/outbrain/posts", newPost, Post.class, headers);
+        ResponseEntity<Post> entity = template.postForEntity("http://localhost:8888/outbrain/api/posts", newPost, Post.class, headers);
         assertTrue("Response code should be 201", entity.getStatusCode() == HttpStatus.CREATED);
         assertTrue("Checking title of created post", entity.getBody().title.equals("test post 1"));
     }
@@ -59,10 +59,10 @@ public class IntegrationTest {
 
         Post newPost = new Post();
         newPost.title = "test post 2";
-        template.postForEntity("http://localhost:8888/outbrain/posts", newPost, Post.class, headers);
+        template.postForEntity("http://localhost:8888/outbrain/api/posts", newPost, Post.class, headers);
 
         // fetch posts
-        List<Map> posts = template.getForObject("http://localhost:8888/outbrain/posts", List.class, headers);
+        List<Map> posts = template.getForObject("http://localhost:8888/outbrain/api/posts", List.class, headers);
 
         assertNotNull(posts);
         LOG.info("Got posts: {}", posts);
@@ -81,10 +81,10 @@ public class IntegrationTest {
         existing.title = "test post 2 modified";
 
         // modify post
-        template.postForEntity("http://localhost:8888/outbrain/posts", existing, Post.class, headers);
+        template.postForEntity("http://localhost:8888/outbrain/api/posts", existing, Post.class, headers);
 
         // fetch the post
-        ResponseEntity<Post> entity = template.getForEntity("http://localhost:8888/outbrain/posts/2", Post.class, headers);
+        ResponseEntity<Post> entity = template.getForEntity("http://localhost:8888/outbrain/api/posts/2", Post.class, headers);
 
         LOG.info("Got post: {}", entity);
         assertNotNull(entity);
@@ -97,10 +97,10 @@ public class IntegrationTest {
         template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
         // delete post
-        template.delete("http://localhost:8888/outbrain/posts/1", headers);
+        template.delete("http://localhost:8888/outbrain/api/posts/1", headers);
 
         // there should now be only one post
-        List<Map> posts = template.getForObject("http://localhost:8888/outbrain/posts", List.class, headers);
+        List<Map> posts = template.getForObject("http://localhost:8888/outbrain/api/posts", List.class, headers);
 
         assertNotNull(posts);
         LOG.info("Got posts: {}", posts);

@@ -70,7 +70,7 @@ public class ControllerTest {
         when(postService.getPost(5)).thenReturn(value);
 
         this.mockQueriesMvc.perform(
-                get("/posts/{id}", 5)
+                get("/api/posts/{id}", 5)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(jsonPath("$.id").value("5"))
@@ -82,7 +82,7 @@ public class ControllerTest {
     public void testBadGetPost() throws Exception {
 
         this.mockQueriesMvc.perform(
-                get("/posts/{id}", 4)
+                get("/api/posts/{id}", 4)
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNotFound());
@@ -100,7 +100,7 @@ public class ControllerTest {
         ObjectMapper mapper = new ObjectMapper();
         String postJson = mapper.writer().writeValueAsString(value);
         this.mockCommandsMvc.perform(
-                post("/posts")
+                post("/api/posts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON)
                         .content(postJson))
@@ -121,7 +121,7 @@ public class ControllerTest {
         when(postService.getPosts(10)).thenReturn(posts);
 
         this.mockQueriesMvc.perform(
-                get("/posts")
+                get("/api/posts")
                         .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(jsonPath("$[3].id").value("4"))

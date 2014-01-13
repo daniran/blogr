@@ -20,7 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  */
 
 @Controller
-@RequestMapping("/posts")
+@RequestMapping("/api/posts")
 public class PostsCommandsController {
     private static Logger LOG = LoggerFactory.getLogger(PostsCommandsController.class);
 
@@ -45,7 +45,7 @@ public class PostsCommandsController {
         }
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(
-                builder.path("/aggregators/orders/{id}")
+                builder.path("/api/posts/{id}")
                         .buildAndExpand(newPost.id).toUri());
 
         return new ResponseEntity<>(newPost, headers, HttpStatus.CREATED);

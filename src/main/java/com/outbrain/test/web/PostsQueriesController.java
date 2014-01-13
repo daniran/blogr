@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping("/posts")
+@RequestMapping("/api/posts")
 public class PostsQueriesController {
     private static Logger LOG = LoggerFactory.getLogger(PostsQueriesController.class);
 

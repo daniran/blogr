@@ -1,0 +1,7 @@
+<ul class="phones">
+    <li ng-repeat="post in posts" class="thumbnail">
+        <a ng-href="#/read/{{post.id}}">{{post.title}}</a> [<a ng-href="#/edit/{{post.id}}">Edit</a>]
+
+        <p>{{post.content}}</p>
+    </li>
+</ul>

@@ -1,0 +1,13 @@
+<ul class="menu">
+    <li><a href="#/list">Show Posts</a></li>
+    <li><a href="" ng-click="save()">Save Post</a></li>
+</ul>
+
+<form ng-submit="save()">
+    <h1>Edit:</h1>
+    <label for="post-title">Title:</label>
+    <input id="post-title" type="text" required ng-model="currentPost.title"/>
+    <label for="post-content">Content:</label>
+    <input id="post-content" type="text" required ng-model="currentPost.content"/>
+    <input type="submit" id="submit" value="Submit"/>
+</form>

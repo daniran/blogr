@@ -1,7 +1,14 @@
-<ul class="phones">
-    <li ng-repeat="post in posts" class="thumbnail">
-        <a ng-href="#/read/{{post.id}}">{{post.title}}</a> [<a ng-href="#/edit/{{post.id}}">Edit</a>]
+<ul class="post-list post-container">
 
-        <p>{{post.content}}</p>
+    <ul class="menu">
+        <li><a href="#/list">Show Posts</a></li>
+        <li><a href="#/edit">Add Post</a></li>
+    </ul>
+
+    <li ng-repeat="post in posts track by post.id" class="thumbnail">
+        <a ng-href="#/read/{{post.id}}"><h1>{{post.title}}</h1></a> [<a ng-href="#/edit/{{post.id}}">Edit</a>]
+        <p>
+            <post-content></post-content>
+        </p>
     </li>
 </ul>

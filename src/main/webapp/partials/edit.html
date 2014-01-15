@@ -3,11 +3,23 @@
     <li><a href="" ng-click="save()">Save Post</a></li>
 </ul>
 
-<form ng-submit="save()">
+<form name="postForm" ng-submit="save()">
     <h1>Edit:</h1>
-    <label for="post-title">Title:</label>
-    <input id="post-title" type="text" required ng-model="currentPost.title"/>
-    <label for="post-content">Content:</label>
-    <input id="post-content" type="text" required ng-model="currentPost.content"/>
-    <input type="submit" id="submit" value="Submit"/>
+
+    <div>
+        <label for="post-title">Title:</label>
+        <input id="post-title" name="post-title" type="text" required ng-model="post.title"/>
+    </div>
+
+    <div>
+        <label for="post-content">Content:</label>
+        <textarea id="post-content" name="post-content" required ng-model="post.content"></textarea>
+    </div>
+
+    <div>
+        <label for="post-author">Author:</label>
+        <input id="post-author" name="post-author" type="email" required ng-model="post.author"/>
+    </div>
+
+    <input type="submit" id="submit" ng-disabled="postForm.$pristine && postForm.$valid" value="Submit"/>
 </form>

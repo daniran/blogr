@@ -1,10 +1,16 @@
-<ul class="menu">
-    <li><a href="#/list">Show Posts</a></li>
-    <li><a href="#/edit">Edit Post</a></li>
-</ul>
+<div class="post-container">
+    <ul class="menu">
+        <li><a href="#/list">Show Posts</a></li>
+        <li><a href="#/edit">Edit Post</a></li>
+    </ul>
 
-<h1>Post Details:</h1>
-<dl>
-    <dt ng-show="currentPost">time:</dt>
-    <dd>{{currentPost.timestamp}}</dd>
-</dl>
+    <h1>{{post.title}}</h1>
+
+    <p>
+        <post-content></post-content>
+    </p>
+    <dl>
+        <dt>Created:</dt>
+        <dd>{{post.timestamp | postDate}}</dd>
+    </dl>
+</div>

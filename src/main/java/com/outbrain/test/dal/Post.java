@@ -1,5 +1,7 @@
 package com.outbrain.test.dal;
 
+import com.outbrain.test.utils.DateUtils;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -7,11 +9,11 @@ import java.util.Date;
 @Table(name = "posts")
 public class Post {
 
-    public Post(String title, String content, String author) {
+    public Post(String title, String content, String author, String timestamp) {
         this.title = title;
         this.content = content;
         this.author = author;
-        this.creationTime = new Date(System.currentTimeMillis());
+        this.creationTime = timestamp == null ? new Date(System.currentTimeMillis()) : DateUtils.StringDateToDate(timestamp);
     }
 
     public Post() {

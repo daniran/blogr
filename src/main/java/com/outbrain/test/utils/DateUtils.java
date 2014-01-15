@@ -1,31 +1,33 @@
 package com.outbrain.test.utils;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.datetime.DateFormatter;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
+import java.util.Locale;
 
 /**
  * Created by daniran on 1/13/14.
  */
 public class DateUtils {
-    static final String DATEFORMAT = "yyyy-MM-dd HH:mm:ss";
+    private final static DateFormatter formatter = new DateFormatter();
+
+    static {
+        formatter.setIso(DateTimeFormat.ISO.DATE_TIME);
+    }
 
     public static String GetDateAsString(Date date) {
-        final SimpleDateFormat sdf = new SimpleDateFormat(DATEFORMAT);
-        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
-        final String utcTime = sdf.format(date);
+        final String isoTime = formatter.print(date, Locale.getDefault());
 
-        return utcTime;
+        return isoTime;
     }
 
     public static Date StringDateToDate(String StrDate) {
         Date dateToReturn = null;
-        SimpleDateFormat dateFormat = new SimpleDateFormat(DATEFORMAT);
-        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
 
         try {
-            dateToReturn = dateFormat.parse(StrDate);
+            dateToReturn = formatter.parse(StrDate, Locale.getDefault());
         } catch (ParseException e) {
             e.printStackTrace();
         }

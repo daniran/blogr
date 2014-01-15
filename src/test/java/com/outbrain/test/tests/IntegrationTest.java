@@ -28,7 +28,7 @@ import static org.junit.Assert.assertTrue;
  * Each test invokes actual HTTP requests
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class IntegrationTest {
+public class IntegrationTest extends BaseTest {
 
     private static Logger LOG = LoggerFactory.getLogger(IntegrationTest.class);
 
@@ -43,10 +43,12 @@ public class IntegrationTest {
 
     @Test
     public void test1CreatePost() {
-        // create a post
         RestTemplate template = new RestTemplate();
+
+        // add a post 1
         Post newPost = new Post();
         newPost.title = "test post 1";
+        newPost.timestamp = ts1;
         ResponseEntity<Post> entity = template.postForEntity("http://localhost:8888/outbrain/api/posts", newPost, Post.class, headers);
         assertTrue("Response code should be 201", entity.getStatusCode() == HttpStatus.CREATED);
         assertTrue("Checking title of created post", entity.getBody().title.equals("test post 1"));
@@ -57,21 +59,57 @@ public class IntegrationTest {
         RestTemplate template = new RestTemplate();
         template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-        Post newPost = new Post();
-        newPost.title = "test post 2";
-        template.postForEntity("http://localhost:8888/outbrain/api/posts", newPost, Post.class, headers);
+        // add a post 2
+        Post newPost2 = new Post();
+        newPost2.title = "test post 2";
+        newPost2.timestamp = ts2;
+        template.postForEntity("http://localhost:8888/outbrain/api/posts", newPost2, Post.class, headers);
+
+        // add a post 3
+        Post newPost3 = new Post();
+        newPost3.title = "test post 3";
+        newPost3.timestamp = ts3;
+        template.postForEntity("http://localhost:8888/outbrain/api/posts", newPost3, Post.class, headers);
 
         // fetch posts
         List<Map> posts = template.getForObject("http://localhost:8888/outbrain/api/posts", List.class, headers);
 
         assertNotNull(posts);
         LOG.info("Got posts: {}", posts);
-        assertTrue("checking size of persisted posts", posts.size() == 2);
-        assertTrue("checking second post", posts.get(1).get("title").equals("test post 1"));
+        assertTrue("checking size of persisted posts", posts.size() == 3); // there should be 3 posts
+        assertTrue("checking last post", posts.get(posts.size() - 1).get("title").equals("test post 3")); // post 3 is oldest
     }
 
     @Test
-    public void test3ModifyPost() {
+    public void test3FetchPostsWithLimit() {
+        RestTemplate template = new RestTemplate();
+        template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+        // fetch posts
+        List<Map> posts = template.getForObject("http://localhost:8888/outbrain/api/posts?limit=2", List.class, headers);
+
+        assertNotNull(posts);
+        LOG.info("Got posts: {}", posts);
+        assertTrue("checking size of persisted posts", posts.size() == 2); // there should be only 2 posts
+        assertTrue("checking last post", posts.get(posts.size() - 1).get("title").equals("test post 2")); // post 2 is oldest
+    }
+
+    @Test
+    public void test4FetchPostsWithSince() {
+        RestTemplate template = new RestTemplate();
+        template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+        // fetch posts
+        List<Map> posts = template.getForObject("http://localhost:8888/outbrain/api/posts?since=" + ts2, List.class, headers);
+
+        assertNotNull(posts);
+        LOG.info("Got posts: {}", posts);
+        assertTrue("checking size of persisted posts", posts.size() == 2); // there should be 2 posts
+        assertTrue("checking last post", posts.get(posts.size() - 1).get("title").equals("test post 2")); // post 2 is oldest
+    }
+
+    @Test
+    public void test5ModifyPost() {
         RestTemplate template = new RestTemplate();
         template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
@@ -92,7 +130,7 @@ public class IntegrationTest {
     }
 
     @Test
-    public void test4DeletePost() {
+    public void test6DeletePost() {
         RestTemplate template = new RestTemplate();
         template.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
@@ -104,7 +142,6 @@ public class IntegrationTest {
 
         assertNotNull(posts);
         LOG.info("Got posts: {}", posts);
-        assertTrue("checking size of persisted posts", posts.size() == 1);
-        assertTrue("checking remaining post", posts.get(0).get("title").equals("test post 2 modified"));
+        assertTrue("checking size of persisted posts", posts.size() == 2); // only 2 left
     }
 }

@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
+import javax.persistence.TemporalType;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,12 +21,17 @@ public class PostRepository {
 
     private static Logger LOG = LoggerFactory.getLogger(PostRepository.class);
 
-    public List<Post> getPosts(int limit) {
-        LOG.debug("Fetching posts with limit: {}", limit);
+    public List<Post> getPosts(int limit, Date since) {
+        LOG.debug("Fetching posts with limit: {} since: {}", limit, since);
         try {
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
-            Query query = em.createQuery("select p from Post p order by p.creationTime desc");
+            Query query = em.createQuery("select p from Post p where p.creationTime >= :since order by p.creationTime desc");
+            if (since != null) {
+                query.setParameter("since", since, TemporalType.TIMESTAMP);
+            } else {
+                query.setParameter("since", new Date(0), TemporalType.TIMESTAMP);
+            }
             if (limit > 0) {
                 query = query.setMaxResults(limit);
             }
@@ -38,10 +45,10 @@ public class PostRepository {
         }
     }
 
-    public Post addPost(String title, String content, String author) {
+    public Post addPost(String title, String content, String author, String timestamp) {
         LOG.debug("Adding post: title: {} content {} author {}", title, content, author);
         try {
-            Post post = new Post(title, content, author);
+            Post post = new Post(title, content, author, timestamp);
             EntityManager em = emf.createEntityManager();
             em.getTransaction().begin();
             em.persist(post);

@@ -1,5 +1,4 @@
 /* app css stylesheet */
-
 body {
   font-family: Georgia, Times, 'Times New Roman', serif;
 }
@@ -13,25 +12,68 @@ h1, h2, h3 {
   border-bottom: 0.1em solid black;
   margin-bottom: 2em;
   padding: 0 0 0.5em;
+}
 
-  > li {
-    display: inline;
-  }
+.menu > li {
+  display: inline;
+}
 
-  > li:before {
-    content: "|";
-    padding-right: 0.3em;
-  }
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
 
-  > li:nth-child(1):before {
-    content: "";
-    padding: 0;
-  }
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
 }
 
 .post-container {
   width: 600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.post-container {
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+#postForm label {
+  margin: 10px 0 5px 0;
+  display: inline-block;
+}
+
+#postForm input, #postForm textarea {
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  width: 100%;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px inset;
+  padding: 5px;
+  font-family: Arial;
+  font-size: 16px;
+}
+
+#postForm textarea {
+  resize: none;
+  height: 200px;
+}
+
+#postForm input[type="submit"] {
+  height: 40px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#postForm input[disabled] {
+  cursor: default;
 }
 

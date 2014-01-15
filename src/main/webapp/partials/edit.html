@@ -1,25 +1,29 @@
-<ul class="menu">
-    <li><a href="#/list">Show Posts</a></li>
-    <li><a href="" ng-click="save()">Save Post</a></li>
-</ul>
+<div class="post-container">
 
-<form name="postForm" ng-submit="save()">
-    <h1>Edit:</h1>
+    <ul class="menu">
+        <li><a href="#/list">Show Posts</a></li>
+        <li><a href="" ng-click="save()">Save Post</a></li>
+    </ul>
 
-    <div>
-        <label for="post-title">Title:</label>
-        <input id="post-title" name="post-title" type="text" required ng-model="post.title"/>
-    </div>
+    <form id="postForm" name="postForm" ng-submit="save()">
+        <h2>Edit Post:</h2>
 
-    <div>
-        <label for="post-content">Content:</label>
-        <textarea id="post-content" name="post-content" required ng-model="post.content"></textarea>
-    </div>
+        <div>
+            <label for="post-title">Title:</label>
+            <input id="post-title" name="post-title" type="text" required ng-model="post.title"/>
+        </div>
 
-    <div>
-        <label for="post-author">Author:</label>
-        <input id="post-author" name="post-author" type="email" required ng-model="post.author"/>
-    </div>
+        <div>
+            <label for="post-content">Content:</label>
+            <textarea id="post-content" name="post-content" required ng-model="post.content"></textarea>
+        </div>
 
-    <input type="submit" id="submit" ng-disabled="postForm.$pristine && postForm.$valid" value="Submit"/>
-</form>
+        <div>
+            <label for="post-author">Author:</label>
+            <input id="post-author" name="post-author" type="email" required ng-model="post.author"/>
+        </div>
+
+        <input type="submit" id="submit" ng-disabled="postForm.$pristine && postForm.$valid" value="Submit"/>
+    </form>
+
+</div>

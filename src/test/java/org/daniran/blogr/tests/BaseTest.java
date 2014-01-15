@@ -1,6 +1,6 @@
-package com.outbrain.test.tests;
+package org.daniran.blogr.tests;
 
-import com.outbrain.test.utils.DateUtils;
+import org.daniran.blogr.utils.DateUtils;
 
 import java.util.Calendar;
 import java.util.Date;

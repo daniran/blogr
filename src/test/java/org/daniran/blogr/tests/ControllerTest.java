@@ -1,12 +1,12 @@
-package com.outbrain.test.tests;
+package org.daniran.blogr.tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
-import com.outbrain.test.api.Post;
-import com.outbrain.test.api.PostService;
-import com.outbrain.test.utils.DateUtils;
-import com.outbrain.test.web.PostsCommandsController;
-import com.outbrain.test.web.PostsQueriesController;
+import org.daniran.blogr.api.Post;
+import org.daniran.blogr.api.PostService;
+import org.daniran.blogr.utils.DateUtils;
+import org.daniran.blogr.web.PostsCommandsController;
+import org.daniran.blogr.web.PostsQueriesController;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

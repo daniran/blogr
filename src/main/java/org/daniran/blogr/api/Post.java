@@ -1,6 +1,6 @@
-package com.outbrain.test.api;
+package org.daniran.blogr.api;
 
-import com.outbrain.test.utils.DateUtils;
+import org.daniran.blogr.utils.DateUtils;
 
 /**
  * Created by daniran on 1/13/14.
@@ -15,7 +15,7 @@ public class Post {
     public Post() {
     }
 
-    public Post(com.outbrain.test.dal.Post post) {
+    public Post(org.daniran.blogr.dal.Post post) {
         this.id = post.getId().toString();
         this.title = post.getTitle();
         this.content = post.getContent();

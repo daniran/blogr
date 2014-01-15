@@ -1,7 +1,7 @@
-package com.outbrain.test.config;
+package org.daniran.blogr.config;
 
-import com.outbrain.test.api.PostService;
-import com.outbrain.test.dal.PostRepository;
+import org.daniran.blogr.api.PostService;
+import org.daniran.blogr.dal.PostRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -25,7 +25,7 @@ public class CoreConfig {
 
     @Bean
     public EntityManagerFactory createEntityManagerFactory() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("com.outbrain.jpa.posts");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("org.daniran.blogr.jpa.posts");
         return factory;
     }
 }

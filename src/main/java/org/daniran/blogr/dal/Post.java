@@ -1,6 +1,6 @@
-package com.outbrain.test.dal;
+package org.daniran.blogr.dal;
 
-import com.outbrain.test.utils.DateUtils;
+import org.daniran.blogr.utils.DateUtils;
 
 import javax.persistence.*;
 import java.util.Date;

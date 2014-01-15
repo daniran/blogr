@@ -1,7 +1,7 @@
-package com.outbrain.test.web;
+package org.daniran.blogr.web;
 
-import com.outbrain.test.api.Post;
-import com.outbrain.test.api.PostService;
+import org.daniran.blogr.api.Post;
+import org.daniran.blogr.api.PostService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

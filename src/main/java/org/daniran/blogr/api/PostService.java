@@ -1,6 +1,6 @@
-package com.outbrain.test.api;
+package org.daniran.blogr.api;
 
-import com.outbrain.test.dal.PostRepository;
+import org.daniran.blogr.dal.PostRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,8 +25,8 @@ public class PostService {
         limit = Math.min(MAX_LIMIT, limit);
         LOG.debug("Fetching posts with limit: {} since: {}", limit, since);
         List<Post> reply = new ArrayList<>();
-        List<com.outbrain.test.dal.Post> posts = repo.getPosts(limit, since);
-        for (com.outbrain.test.dal.Post post : posts) {
+        List<org.daniran.blogr.dal.Post> posts = repo.getPosts(limit, since);
+        for (org.daniran.blogr.dal.Post post : posts) {
             reply.add(new Post(post));
         }
         return reply;
@@ -34,13 +34,13 @@ public class PostService {
 
     public Post getPost(long id) {
         LOG.debug("Fetching post with id: {}", id);
-        com.outbrain.test.dal.Post post = repo.getPost(id);
+        org.daniran.blogr.dal.Post post = repo.getPost(id);
         return new Post(post);
     }
 
     public Post deletePost(long id) {
         LOG.debug("Deleting post with id: {}", id);
-        com.outbrain.test.dal.Post post = repo.deletePost(id);
+        org.daniran.blogr.dal.Post post = repo.deletePost(id);
         if (post == null) {
             return null;
         }
@@ -50,10 +50,10 @@ public class PostService {
     public Post savePost(Post post) {
         LOG.debug("Saving post: {}", post);
         if (post.id == null) {
-            com.outbrain.test.dal.Post newPost = repo.addPost(post.title, post.content, post.author, post.timestamp);
+            org.daniran.blogr.dal.Post newPost = repo.addPost(post.title, post.content, post.author, post.timestamp);
             return new Post(newPost);
         } else {
-            com.outbrain.test.dal.Post existing = repo.modifyPost(Long.parseLong(post.id), post.title, post.content, post.author);
+            org.daniran.blogr.dal.Post existing = repo.modifyPost(Long.parseLong(post.id), post.title, post.content, post.author);
             return new Post(existing);
         }
     }

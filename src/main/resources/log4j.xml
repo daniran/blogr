@@ -20,7 +20,7 @@
         <priority value="debug"/>
     </category>
 
-    <category name="com.outbrain.test">
+    <category name="org.daniran.blogr">
         <priority value="debug"/>
     </category>
 

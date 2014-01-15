@@ -1,4 +1,4 @@
-package com.outbrain.test.utils;
+package org.daniran.blogr.utils;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.datetime.DateFormatter;

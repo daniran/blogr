@@ -46,7 +46,7 @@ At the moment I only tested this on Tomcat 7 and MySQL
 #### Deployment
 
 During the Maven install Maven tries to deploy the WAR to a running Tomcat server on port 8080.
-To allow the deploy you must enable the Tomcat deploy user by adding the following entries to the tomcat-user.xml in the config folder:
+To allow the deploy you must enable the Tomcat deploy user by adding the following entries to the `tomcat-users.xml` in the config folder:
 You can choose you own user/password and update it in the project POM in the `tomcat7-maven-plugin` section
 
 ```xml

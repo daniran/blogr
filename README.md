@@ -1,7 +1,9 @@
 blogr
 =====
 
-a simple blogging app
+a simple blogging app that allows users to add, edit, and view blog posts.
+
+the posts are done using [Creole syntax](http://www.wikicreole.org/wiki/CheatSheet)
 
 The app is built using the following technologies:
 
@@ -48,6 +50,8 @@ At the moment I only tested this on Tomcat 7 and MySQL
 During the Maven install Maven tries to deploy the WAR to a running Tomcat server on port 8080.
 To allow the deploy you must enable the Tomcat deploy user by adding the following entries to the `tomcat-users.xml` in the config folder:
 You can choose you own user/password and update it in the project POM in the `tomcat7-maven-plugin` section
+
+After deployment the app is available at [http://localhost:8080/blogr](http://localhost:8080/blogr)
 
 ```xml
  <role rolename="manager-script"/>

@@ -1,90 +1,78 @@
 /* app css stylesheet */
 body {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-}
+  font-family: Georgia, Times, 'Times New Roman', serif; }
 
 h1, h2, h3 {
-    font-family: 'Playfair Display', serif;
-}
+  font-family: 'Playfair Display', serif; }
 
 .menu {
-    list-style: none;
-    border-bottom: 0.1em solid black;
-    margin-bottom: 2em;
-    padding: 0 0 0.5em;
-}
-
-.menu > li {
-    display: inline;
-}
-
-.menu > li:before {
-    content: "|";
-    padding-right: 0.3em;
-}
-
-.menu > li:nth-child(1):before {
-    content: "";
-    padding: 0;
-}
-
-.post-container {
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em; }
+  .menu:before, .menu:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */ }
+  .menu:after {
+    clear: both; }
+  .menu > li {
+    float: left;
+    margin-right: 10px; }
+    .menu > li a {
+      font-family: 'Roboto', sans-serif;
+      font-weight: 300;
+      font-size: 20px;
+      color: gray;
+      text-decoration: none; }
+      .menu > li a:hover {
+        color: #4d4d4d; }
 
 .post-container {
-    width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto; }
 
-post-content img {
-    max-width: 100%;
-}
+.post-content img {
+  max-width: 100%; }
 
 .post-list {
-    list-style: none;
-}
-
-.post-list > li {
-    border-bottom: 1px solid gray;
-}
+  list-style: none; }
+  .post-list > li {
+    border-bottom: 1px solid gray; }
 
 .post-link {
-    text-decoration: none;
-    color: black;
-}
+  text-decoration: none;
+  color: black; }
+  .post-link:hover {
+    text-decoration: underline; }
 
 #postForm label {
-    margin: 10px 0 5px 0;
-    display: inline-block;
-}
-
-#postForm input, #postForm textarea {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    width: 100%;
-    height: 20px;
-    border-radius: 5px;
-    border: 1px inset;
-    padding: 5px;
-    font-size: 16px;
-}
-
+  margin: 10px 0 5px 0;
+  display: inline-block; }
+#postForm input {
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  width: 100%;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px inset;
+  padding: 5px;
+  font-size: 16px; }
 #postForm textarea {
-    resize: none;
-    height: 200px;
-}
-
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  width: 100%;
+  height: 20px;
+  border-radius: 5px;
+  border: 1px inset;
+  padding: 5px;
+  font-size: 16px;
+  resize: none;
+  height: 200px; }
 #postForm input[type="submit"] {
-    height: 40px;
-    border: none;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
+  height: 40px;
+  border: none;
+  margin-top: 20px;
+  cursor: pointer; }
 #postForm input[disabled] {
-    cursor: default;
-}
-
+  cursor: default; }

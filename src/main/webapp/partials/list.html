@@ -8,10 +8,12 @@
         <a class="post-link" ng-href="#/read/{{post.id}}"><h1>{{post.title}}</h1></a>
         <sup>{{post.timestamp | postDate}}</sup>
 
-        <div>[<a ng-href="#/edit/{{post.id}}">Edit</a>]</div>
+        <ul class="menu">
+            <li><a ng-href="#/edit/{{post.id}}">Edit</a></li>
+        </ul>
 
         <p>
-            <post-content></post-content>
+            <post-content class="post-content"></post-content>
         </p>
         <div><sup>{{post.author}}</sup></div>
     </li>

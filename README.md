@@ -5,8 +5,6 @@ a simple blogging app that allows users to add, edit, and view blog posts.
 
 the posts are done using [Creole syntax](http://www.wikicreole.org/wiki/CheatSheet)
 
-The app is built using the following technologies:
-
 ## Overview
 
 Technologies used:

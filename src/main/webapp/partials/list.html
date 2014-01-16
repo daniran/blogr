@@ -1,14 +1,18 @@
 <ul class="post-list post-container">
 
     <ul class="menu">
-        <li><a href="#/list">Show Posts</a></li>
         <li><a href="#/edit">Add Post</a></li>
     </ul>
 
     <li ng-repeat="post in posts track by post.id" class="thumbnail">
-        <a class="post-link" ng-href="#/read/{{post.id}}"><h1>{{post.title}}</h1></a> [<a ng-href="#/edit/{{post.id}}">Edit</a>]
+        <a class="post-link" ng-href="#/read/{{post.id}}"><h1>{{post.title}}</h1></a>
+        <sup>{{post.timestamp | postDate}}</sup>
+
+        <div>[<a ng-href="#/edit/{{post.id}}">Edit</a>]</div>
+
         <p>
             <post-content></post-content>
         </p>
+        <div><sup>{{post.author}}</sup></div>
     </li>
 </ul>

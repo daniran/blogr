@@ -1,7 +1,7 @@
 <div class="post-container">
     <ul class="menu">
-        <li><a href="#/list">Show Posts</a></li>
-        <li><a href="#/edit">Edit Post</a></li>
+        <li><a href="#/list">All Posts</a></li>
+        <li><a href="#/edit/{{post.id}}">Edit Post</a></li>
     </ul>
 
     <h1>{{post.title}}</h1>
@@ -12,5 +12,9 @@
     <dl>
         <dt>Created:</dt>
         <dd>{{post.timestamp | postDate}}</dd>
+    </dl>
+    <dl>
+        <dt>Author:</dt>
+        <dd>{{post.author}}</dd>
     </dl>
 </div>

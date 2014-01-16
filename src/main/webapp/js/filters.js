@@ -9,6 +9,6 @@ filters.filter('postDate', function ($filter) {
     return function (timestamp) {
         if (!timestamp)
             return '';
-        return $filter('date')(timestamp, 'MM/dd/yyyy - h:mma');
+        return $filter('date')(timestamp, 'medium');
     }
 });

@@ -1,7 +1,7 @@
 <div class="post-container">
 
     <ul class="menu">
-        <li><a href="#/list">Show Posts</a></li>
+        <li><a href="#/list">All Posts</a></li>
         <li><a href="" ng-click="save()">Save Post</a></li>
     </ul>
 
@@ -14,7 +14,10 @@
         </div>
 
         <div>
-            <label for="post-content">Content:</label>
+            <label for="post-content">Content:
+                <a href="http://www.wikicreole.org/attach/CheatSheet/creole_cheat_sheet.html" target="_blank">
+                    Creole Syntax</a>
+            </label>
             <textarea id="post-content" name="post-content" required ng-model="post.content"></textarea>
         </div>
 

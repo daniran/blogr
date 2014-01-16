@@ -4,15 +4,15 @@
 var controllers = angular.module('blogrApp.controllers', []);
 
 // List
-controllers.controller('BlogListController', ['$scope', '$http', '$route', 'PostsService', 'creoleParser', 'POST_FETCH_LIMIT',
-    function ($scope, $http, $route, PostsService, creoleParser, POST_FETCH_LIMIT) {
+controllers.controller('BlogListController', ['$scope', 'PostsService', 'POST_FETCH_LIMIT',
+    function ($scope, PostsService, POST_FETCH_LIMIT) {
         $scope.posts = PostsService.query({limit: POST_FETCH_LIMIT});
     }]
 );
 
 // Read
-controllers.controller('BlogReadController', ['$scope', '$http', '$route', 'PostsService',
-    function ($scope, $http, $route, PostsService) {
+controllers.controller('BlogReadController', ['$scope', '$route', 'PostsService',
+    function ($scope, $route, PostsService) {
         if ($route.current.params && $route.current.params.postId) {
             $scope.post = PostsService.get({postId: $route.current.params.postId});
         }
@@ -20,15 +20,17 @@ controllers.controller('BlogReadController', ['$scope', '$http', '$route', 'Post
 );
 
 //Edit
-controllers.controller('BlogEditController', ['$scope', '$http', '$route', 'PostsService', 'newPost',
-        function ($scope, $http, $route, PostsService, newPost) {
+controllers.controller('BlogEditController', ['$scope', '$route', '$location', 'PostsService', 'newPost',
+        function ($scope, $route, $location, PostsService, newPost) {
             if ($route.current.params && $route.current.params.postId)
                 $scope.post = PostsService.get({postId: $route.current.params.postId});
             else
                 $scope.post = newPost;
 
             $scope.save = function () {
-                PostsService.save($scope.post);
+                PostsService.save($scope.post, function () {
+                    $location.path('/list');
+                });
             }
         }]
     ).factory('newPost', function () {

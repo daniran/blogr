@@ -30,7 +30,7 @@ Testing is done in two phases: (in the corresponding Maven phases)
 - `integration-test`: Runs an embedded Tomcat instance on port `8888`, configures JPA to use HSQLDB memory DB, and tests the REST URLs
 
 ### Frontend
-TBD
+Tests using Jasmine and Angular Mock
 
 ## Running
 
